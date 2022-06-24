@@ -1,0 +1,55 @@
+{% extends "layouts/base.layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="col">
+        <div class="row justify-content-center">
+            <img class="rounded-circle border-none shadow-lg m-4" src="{{url_for('static', filename='img/mateo.jpeg')}}"/>
+        </div>
+
+        <div class="row justify-content-center">
+            <p class="h1">Contact Me</p>
+        </div>
+
+        <div class="row justify-content-center m-3">
+            <div class="card rounded-circle border-white shadow-lg m-3 style="width: 25rem;">
+                <div class="card-body">
+                  <a href="https://github.com/MMAT30" class="card-link" style="color: black;"><i class="fa-brands fa-4x fa-github"></i></a>
+                </div>
+            </div>
+
+        
+
+            <div class="card rounded-circle border-white shadow-lg m-3 style="width: 25rem;">
+              <div class="card-body">
+                <a href="#" class="card-link" style="color: black;"><i class="fa-brands fa-4x fa-discord"></i></a>
+              </div>
+          </div>
+
+            <div class="card rounded-circle border-white shadow-lg m-3 style="width: 25rem;">
+                <div class="card-body">
+                  <a href="#" class="card-link" style="color: black;"><i class="fa-brands fa-4x fa-twitch"></i></a>
+                </div>
+            </div>
+
+            <div class="card rounded-circle border-white shadow-lg m-3 style="width: 25rem;">
+              <div class="card-body">
+                <a href="https://www.linkedin.com/in/mateo-martinez-719a421a9/" class="card-link" style="color: black;"><i class="fa-brands fa-4x fa-linkedin"></i></a>
+              </div>
+          </div>
+
+            <div class="card rounded-circle border-white shadow-lg m-3 style="width: 25rem;">
+                <div class="card-body">
+                  <a href="#" class="card-link" style="color: black;"><i class="fa-solid fa-4x fa-envelope"></i></a>
+                </div>
+            </div>
+
+     
+          
+        </div>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/74b8859103.js" crossorigin="anonymous"></script>
+
+{% endblock %}

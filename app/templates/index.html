@@ -1,63 +1,28 @@
-{% extends "layouts/base.layout.html" %} {% block styles %}
-<link
-  href="{{url_for('static', filename='css/hobbies.css')}}"
-  rel="stylesheet"
-/>
-{% endblock %} {% block content %}
+{% extends "layouts/base.layout.html" %}
+{% block content %}
+
 <div class="container">
-  <div class="card border-dark mb-3" style="width: 18rem">
-    <img
-      src="{{url_for('static', filename='img/mateo.jpeg')}}"
-      class="card-img-top"
-      alt="..."
-    />
-    <div class="card-body">
-      <h5 class="card-title">Mateo's Hobbies</h5>
-      <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </p>
-      <a href="{{ url_for('about') }}" class="btn btn-primary"
-        >Learn More About Me</a
-      >
-    </div>
-  </div>
+  <div class="col">
 
-  <div class="card border-dark mb-3" style="width: 18rem">
-    <img
-      src="{{url_for('static', filename='img/nacho.jpeg')}}"
-      class="card-img-top"
-      alt="..."
-    />
-    <div class="card-body">
-      <h5 class="card-title">Nacho's Hobbies</h5>
-      <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </p>
-      <a href="{{ url_for('about') }}" class="btn btn-primary"
-        >Learn More About Me</a
-      >
-    </div>
-  </div>
+      <div class="row justify-content-center">
+        <img class="rounded-circle border-none shadow-lg m-4" src="{{url_for('static', filename='img/mateo.jpeg')}}"/>
+      </div>
 
-  <div class="card border-dark mb-3" style="width: 18rem">
-    <img
-      src="{{url_for('static', filename='img/marlene.jpeg')}}"
-      class="card-img-top"
-      alt="..."
-    />
-    <div class="card-body">
-      <h5 class="card-title">Marlene's Hobbies</h5>
-      <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </p>
-      <a href="{{ url_for('about') }}" class="btn btn-primary"
-        >Learn More About Me</a
-      >
-    </div>
+      <div class="row justify-content-center">
+        <p class="h1">Mateo Martinez</p>
+      </div>
+
+      <div class="row justify-content-center m-4">
+        <div class="card shadow-lg border-white text-center" >
+          <div class="card-body">
+            <p class="card-text">💻 {{ indexData['intro'] }} 📱</p>
+            <!-- <p class="card-text h1"></p> -->
+            <p class="card-text">🐔 Based in the 956 🐔</p>
+          </div>
+        </div>
+      </div>
+    
   </div>
-</div>
+</div> 
 
 {% endblock %}

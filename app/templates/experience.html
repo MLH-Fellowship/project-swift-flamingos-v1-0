@@ -1,53 +1,72 @@
-{% extends "layouts/base.layout.html" %} {% block styles %}
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap"
-  rel="stylesheet"
-/>
-<link
-  href="{{url_for('static', filename='css/experience.css')}}"
-  rel="stylesheet"
-/>
-
-{% endblock %} {% block content %}
+{% extends "layouts/base.layout.html" %} {% block content %}
 
 <div class="container">
-  <h1>My career so far</h1>
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+  <div class="col">
+    <div class="row justify-content-center">
+      <img
+        class="rounded-circle border-none shadow-lg m-4"
+        src="{{url_for('static', filename='img/mateo.jpeg')}}"
+      />
+    </div>
+
+    <div class="row justify-content-center">
+      <p class="h1">Experience</p>
+    </div>
+
+    <div class="container">
+      <div class="row mt-5 mb-5">
+        <div class="col-lg-4 d-flex justify-content-center">
+          <div class="card border-white shadow-lg" style="width: 18rem">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ experienceData['swe'][0] }}</h5>
+              {% for x in experienceData['swe'][1] %}
+              <p class="card-text">{{x}}</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-center">
+          <div class="card border-white shadow-lg" style="width: 18rem">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ experienceData['linux'][0] }}</h5>
+              {% for x in experienceData['linux'][1] %}
+              <p class="card-text">{{x}}</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-center">
+          <div class="card border-white shadow-lg" style="width: 18rem">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ experienceData['networking'][0] }}</h5>
+              {% for x in experienceData['networking'][1] %}
+              <p class="card-text">{{x}}</p>
+              {% endfor %}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <div class="container">
+      <div class="row mt-5 mb-5 justify-content-center">
+        <div class="col-lg-4 d-flex justify-content-center">
+          <div class="card border-white shadow-lg" style="width: 18rem">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ experienceData['hardware'][0] }}</h5>
+              {% for x in experienceData['hardware'][1] %}
+              <p class="card-text">{{x}}</p>
+              {% endfor %}
+            </div>
+          </div>
         </div>
+ 
       </div>
     </div>
-  </div>
 
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
+
+  </div>
 </div>
 
 {% endblock %}

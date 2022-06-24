@@ -1,16 +1,24 @@
-{% extends "layouts/base.layout.html" %} {% block styles %}
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="stylesheet" />
-<link
-  href="{{url_for('static', filename='css/places.css')}}"
-  rel="stylesheet"
-/>
-{% endblock %} {% block content %}
+{% extends "layouts/base.layout.html" %} 
+{% block content %}
 
 <div class="container">
-  <h1>Here are some places I have visited!</h1>
-  <iframe src="{{ maps['marlene'] }}"></iframe>
+  <div class="col">
+      <div class="row justify-content-center">
+          <img class="rounded-circle border-none shadow-lg m-4" src="{{url_for('static', filename='img/mateo.jpeg')}}"/>
+      </div>
+
+      <div class="row justify-content-center">
+        <p class="h1">Places I've Been</p>
+      </div>
+
+      <div class="row justify-content-center mb-5">
+        <div class="embed-responsive embed-responsive-16by9 shadow-lg rounded-lg m-5">
+          <iframe src="{{ placesData['map'] }}" class="embed-responsive-item" ></iframe>
+        </div>
+      </div>
+        
+      
+  </div>
 </div>
 
 {% endblock %}

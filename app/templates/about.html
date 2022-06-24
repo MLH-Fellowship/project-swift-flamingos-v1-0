@@ -1,35 +1,32 @@
-{% extends "layouts/base.layout.html" %} {% block styles %}
+{% extends "layouts/base.layout.html" %} {% block content %}
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="stylesheet" />
-<link href="{{url_for('static', filename='css/about.css')}}" rel="stylesheet" />
 
-{% endblock %} {% block content %}
-<!-- about me -->
 <div class="container">
-  <div class="profile">
-    <!-- user image -->
-    <img src="{{url_for('static', filename='img/marlene.jpeg')}}" class="rounded-circle" />
-  </div>
+  <div class="col">
+    <div class="row justify-content-center">
+      <img
+        class="rounded-circle border-none shadow-lg m-4"
+        src="{{url_for('static', filename='img/mateo.jpeg')}}"
+      />
+    </div>
 
-  <div class="typing" id="type">
-  </div>
-  <div class="social-menu">
-    <ul>
-      <li><a href="https://github.com/marleneharms" target="blank"><i class="fab fa-github"></i></i></a></li>
-      <li><a href="https://www.instagram.com/lenyharms/" target="blank"><i class="fab fa-instagram"></i></a></li>
-      <li><a href="https://www.linkedin.com/in/marlene-harms/" target="blank"><i class="fab fa-linkedin-in"></i></a>
-      </li>
-    </ul>
+    <div class="row justify-content-center">
+      <p class="h1">About Me</p>
+    </div>
+
+    <div class="row mt-5 mb-5">
+      <div class="col">
+        <div class="card border-white shadow-lg">
+          <div class="card-body text-center">
+            <h5 class="card-title">Who Am I</h5>
+            {% for x in aboutData %}
+            <p class="card-text">{{x}}</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-{% endblock %}
-
-
-{% block scripts %}
-<script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
-<script src="{{url_for('static', filename='js/type.js')}}"></script>
 {% endblock %}
