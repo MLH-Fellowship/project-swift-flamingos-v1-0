@@ -1,8 +1,35 @@
+from email.policy import default
 import os
+import datetime
 from flask import Flask, render_template, request
+from playhouse.shortcuts import model_to_dict
 from dotenv import load_dotenv
+from peewee import *
+
 
 load_dotenv()
+
+db = MySQLDatabase(
+    os.getenv("MYSQL_DATABASE"),
+    user=os.getenv("MYSQL_USER"),
+    password=os.getenv("MYSQL_PASSWORD"),
+    host=os.getenv("MYSQL_HOST"),
+    port=3306
+)
+
+
+class TimelinePost(Model):
+    name = CharField()
+    email = CharField()
+    content = TextField()
+    created_at = DateTimeField(default=datetime.datetime.now)
+
+    class Meta:
+        database = db
+
+
+db.connect()
+db.create_tables([TimelinePost])
 app = Flask(__name__)
 
 
@@ -56,7 +83,7 @@ aboutData = [
 hobbiesData = [
     {"img": "img/spi.jpeg", "title": "🌊 South Padre Island 🌊",
         "content": "On days that I'm off me and my family like to go eat cajun seafood. We also like to fish off a part of the island called the Jetties. And of course, we go swim in the water!"},
-    {"img": "img/mnt.jpeg", "title": "🥾 Hiking 🥾", 
+    {"img": "img/mnt.jpeg", "title": "🥾 Hiking 🥾",
         "content": "I recently found a love for hiking. This is a trail that was off the road as I was heading towards Mnt. Rainier. This pond called Jacob's Pond was so clear you coud see the bottom about 30ft out!"},
     {"img": "img/pi.jpeg", "title": "💾 Raspberry Pi's 💾",
         "content": "These computers have changed the way we see computing. Thay have been used in many real world pojects. Because of their open source nature it has given life to ideas without breaking the bank!"},
@@ -105,3 +132,41 @@ def experience():
 @app.route('/contact')
 def contact():
     return render_template('contact.html', contactData=contactData)
+
+
+
+@app.route('/api/timeline_post', methods=['POST'])
+def post_time_line_post():
+    name = request.form['name']
+    email = request.form['email']
+    content = request.form['content']
+    timeline_post = TimelinePost.create(
+        name=name, email=email, content=content)
+
+    return model_to_dict(timeline_post)
+
+
+
+@app.route('/api/timeline_post', methods=['DELETE'])
+def delete_time_line_post():
+    id = request.form['id']
+
+    post = TimelinePost.get(TimelinePost.id == id)
+    TimelinePost.delete_by_id(id)
+
+    return model_to_dict(post)
+
+
+
+
+
+
+@app.route('/api/timeline_post', methods=['GET'])
+def get_time_line_post():
+
+    return {
+        "timeline posts": [
+            model_to_dict(p)
+            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+        ]
+    }
