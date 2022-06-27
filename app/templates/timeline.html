@@ -1,0 +1,100 @@
+{% extends "layouts/base.layout.html" %} {% block content %}
+
+<div class="container">
+  <div class="col m-4">
+    <div class="row justify-content-center">
+
+      <!-- timeline post form -->
+      <div class="card border-none shadow-lg">
+        <div class="card-body text-center">
+          <form id="form">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                aria-describedby="emailHelp"
+                placeholder="Full Name"
+              />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="email@example.com"
+              />
+            </div>
+            <div class="form-group">
+              <label>Content</label>
+              <textarea
+                name="content"
+                class="form-control"
+                placeholder="Enter Content Here"
+                cols="30"
+                rows="10"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-secondary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="container">
+
+
+  <div class="row justify-content-center m-3">
+    <p class="h2">TimeLine Data</p>
+  </div>
+  
+  <div class="row justify-content-center m-3">
+    <div class="col">
+    {% for x in data.timeline_posts %}
+    <div class="card border-none text-center shadow-lg mb-5" id="mytimeline">
+      <p class="card-text m-2"><span class="text-danger">Name:</span> {{x['name']}}</p>
+      <p class="card-text m-2"><span class="text-danger">Email:</span> {{x['email']}}</p>
+      <p class="card-text m-2"><span class="text-danger">Content:</span> {{x['content']}}</p>
+      <p class="card-text m-2"><span class="text-danger">Created At:</span> {{x['created_at']}}</p>
+      <p class="card-text m-2"><span class="text-danger">Id:</span> {{x['id']}}</p>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+
+</div>
+
+<script>
+  const form = document.getElementById('form');
+
+  form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const prePayload = new FormData(form);
+      const payload = new URLSearchParams(prePayload);
+
+     
+      fetch('/api/timeline_post', {
+          method: "POST",
+          body: payload,
+      })
+
+      .then(() => {
+      window.location.reload();
+      })
+  })
+</script>
+
+
+
+{% endblock %}
