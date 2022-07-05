@@ -1,34 +1,25 @@
-from email.policy import default
 import os
 import datetime
-from flask import Flask, redirect, render_template, request
+from flask import Flask, render_template, request
 from playhouse.shortcuts import model_to_dict
 from dotenv import load_dotenv
 from peewee import *
 import re
 
 
+load_dotenv()
+
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
-    mydb = SqliteDatabase("file:memory?mode=memory&cache=shared", uri=True)
+    db = SqliteDatabase("file:memory?mode=memory&cache=shared", uri=True)
 else:
-    mydb = MySQLDatabase(
-        os.getenv("MYSOL DATABASE"),
+    db = MySQLDatabase(
+        os.getenv("MYSQL_DATABASE"),
         user=os.getenv("MYSQL_USER"),
         password=os.getenv("MYSQL_PASSWORD"),
         host=os.getenv("MYSQL_HOST"),
         port=3306,
     )
-
-load_dotenv()
-
-db = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306,
-)
 
 
 class TimelinePost(Model):
@@ -178,7 +169,7 @@ def timeline():
 def delete_time_line_post():
     id = request.form["id"]
     TimelinePost.delete_by_id(id)
-    return render_template("timeline.html")
+    return f"deleted timeline_post id: {id}", 200
 
 
 @app.route("/api/timeline_post", methods=["POST"])

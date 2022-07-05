@@ -18,7 +18,6 @@ class AppTestCase(unittest.TestCase):
         assert """<p class="h1">Mateo Martinez</p>""" in html
 
         # TODO Add more tests relating to the home page
-
         response = self.client.get("/")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
@@ -33,7 +32,9 @@ class AppTestCase(unittest.TestCase):
         assert response.is_json
         json = response.get_json()
         assert "timeline_posts" in json
-        assert len(json["timeline_posts"]) == len(json["timeline_posts"])
+        assert len(json["timeline_posts"]) == 0
+
+
         # TODO Add more tests relating to the /api/timeline_post GET and POST apis
         # POST
         response = self.client.post(
@@ -49,12 +50,17 @@ class AppTestCase(unittest.TestCase):
         # GET
         response = self.client.get("/api/timeline_post")
         data = response.get_data(as_text=True)
-        # print(data)
         assert '"name":"test"' in data
         assert '"email":"test@test.com"' in data
         assert '"content":"testing"' in data
 
         # TODO Add more tests relating to the timeline page
+        #DELETE
+        response = self.client.delete("/api/timeline_post", data={"id": "1"})
+        assert response.status_code == 200
+        html = response.get_data(as_text=True)
+        assert "deleted timeline_post id: 1" in html
+
 
     def test_malformed_timeline_post(self):
 
